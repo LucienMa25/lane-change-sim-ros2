@@ -363,7 +363,7 @@ RViz2 默认加载：`rviz/simulation.rviz`（窗口默认近全屏尺寸、追�
 
 ### 运行效果（可视化）
 
-![仿真运行效果](docs/simulation_demo.gif)
+![仿真运行效果](https://cdn.jsdelivr.net/gh/LucienMa25/lane-change-sim-ros2@main/docs/simulation_demo.gif)
 
 上图为 RViz2 追尾视角仿真录屏（自车居中，周围可见他车着色、车道线、安全走廊与红/绿轨迹），画面元素对照：
 
