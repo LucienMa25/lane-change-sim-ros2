@@ -1,0 +1,100 @@
+/**:
+  ros__parameters:
+    # ─────────────────────────────────────────────────────────────────────────────
+    # lane_change_sim  algorithm parameters
+    # ─────────────────────────────────────────────────────────────────────────────
+
+    # ── MCTS / MPDM ──
+    sim_time: 9.0          # total forward simulation horizon [s]
+    sim_ts:   0.3          # simulation timestep [s]
+    ctrl_ts:  0.1          # control timestep [s]
+    tree_hight: 3          # MCTS tree depth (each layer = sim_time/tree_hight)
+    mcts_delete_on_failure: true  # true=MCTS1(删除失败节点), false=MCTS(保留并惩罚-1000)
+
+    # ── Vehicle dynamics limits ──
+    max_v:          10.0   # m/s
+    max_a:           3.0   # m/s²
+    min_a:          -5.0   # m/s²
+    max_j:           5.0   # m/s³
+    max_delta:       0.5   # rad
+    max_omega:       1.0   # rad/s (steer rate continuous)
+    max_steer:       0.2   # rad (wheels)
+    max_steer_rate:  0.5   # rad/s
+
+    # ── Traffic scenario diversity (simulation_node) ──
+    traffic_speed_jitter: 2.0   # ± uniform offset on each traffic vehicle's desired speed [m/s] (0 = disabled)
+    traffic_ref_speed:    7.0   # fallback base speed if lane ref not yet available at init [m/s]
+    traffic_speed_seed:   0     # 0 = random scenario every launch; set N>0 for reproducible runs
+    intention_recognition: true # behavior-based traffic intention (Yield=green / Aggressive=red markers)
+
+    # ── Cost weights (MCTS evaluation) ──
+    effic_cost:  2.0
+    safe_cost:  10.0
+    action_cost: 10.0
+    navi_cost:  5000.0
+    affect_cost: 5.0
+    fade_factor: 0.8
+    search_new_wight: 10.0
+
+    # ── RSS safety model ──
+    rss_response_time: 1.0
+    rss_longitudinal_acc_max: 2.0
+    rss_longitudinal_brake_min: 4.0
+    rss_longitudinal_brake_max: 8.0
+    rss_lateral_miu: 0.3
+
+    # ── MOBIL lane-change model ──
+    mobil_politeness: 0.3
+    mobil_gain_threshold: 0.1
+    mobil_rear_acc_threshold: -2.0
+    rss_cost: 30.0
+
+    # ── Safe corridor inflation ──
+    cube_inflate_dx: 1.0   # m per inflation step (x direction)
+    cube_inflate_dy: 0.3   # m per inflation step (y direction)
+
+    # ── Trajectory optimizer ──
+    traj_time:       6.0   # optimization horizon [s]
+    traj_ts:         0.1   # fine timestep [s]
+    weight_penalty:  1.0e5
+    weight_x:        5.0
+    weight_y:        5.0
+    weight_theta:    5.0
+    weight_cube_center_x: 2.0
+    weight_cube_center_y: 6.0
+    weight_omega:  100.0
+    weight_jerk:     1.0
+
+    # ── IPOPT solver options ──
+    ipopt_max_iter:        80       # 最大迭代次数（防止跑飞）
+    ipopt_tol:             1.0e-4   # 主收敛容差（放宽→更快）
+    ipopt_acceptable_tol:  1.0e-4   # 可接受解容差
+    ipopt_acceptable_iter: 10       # 连续满足 acceptable_tol 几次即停止
+    ipopt_mu_strategy:     "monotone"  # 障碍参数策略（monotone 是默认值，更稳定）
+    warm_start_enable:     false       # 是否启用热启动（用上一帧最优解做初始猜测）
+
+    # ── Obstacle prediction ──
+    pred_horizon: 6.0
+    pred_enable_imm: false
+    pred_process_noise: 0.5
+
+    # ── Adaptive weights ──
+    adapt_weights_enable: true
+    adapt_front_dist_near: 10.0
+    adapt_front_dist_far: 50.0
+    adapt_front_rel_v_threshold: 1.0
+
+    # ── Lane change gap tracking (EPSILON PropagateOnceAdvancedLC style) ──
+    lc_gap_tracking_enable: true   # Enable gap-aware longitudinal control during LC
+    lc_gap_headway_time: 1.0       # Time headway for gap safe distance [s]
+    lc_gap_min_dist: 2.0           # Minimum static gap distance [m]
+    lc_ctx_weight_cur: 0.4         # CtxIDM weight for current-lane leading vehicle
+    lc_ctx_weight_tar: 0.8         # CtxIDM weight for target-gap tracking
+    lc_gap_kp: 0.1                 # P-gain for gap position error → velocity correction
+    lc_gap_dv_lb: -3.0             # Lower bound for dv correction [m/s]
+    lc_gap_dv_ub: 5.0              # Upper bound for dv correction [m/s]
+
+    # ── Navigation goal ──
+    target_lane_id: 2      # target lane (1-indexed, bottom=1)
+    target_x:       200.0  # goal longitudinal position [m]
+    publish_coarse_path: true  # publish coarse trajectory as Path for RViz

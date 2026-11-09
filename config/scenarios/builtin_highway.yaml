@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    scenario_mode: builtin_highway
+    epsilon_root: ""
+    epsilon_lane_width: 4.0
+    epsilon_ref_speed: 7.0
+    epsilon_max_vehicles: 7

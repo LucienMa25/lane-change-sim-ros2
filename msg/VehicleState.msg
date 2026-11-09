@@ -1,0 +1,15 @@
+std_msgs/Header header
+uint32 id
+uint32 lane_id
+float64 px
+float64 py
+float64 speed
+float64 heading
+float64 yaw_rate
+float64 acc
+float64 steer
+uint8 lat_behavior
+uint8 lon_behavior
+uint8 lane_change_stage
+uint8 intention
+float64 desired_speed

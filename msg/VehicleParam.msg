@@ -1,0 +1,8 @@
+float64 width
+float64 length
+float64 wheel_base
+float64 front_suspension
+float64 rear_suspension
+float64 max_steering_angle
+float64 max_longitudinal_acc
+float64 max_lateral_acc

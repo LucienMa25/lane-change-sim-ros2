@@ -1,0 +1,7 @@
+<!-- 整车 - ROS1 兼容版本 -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ego_car">
+    <xacro:property name="PI" value="3.141592653"/>
+    <xacro:include filename="$(find lane_change_sim)/urdf/main_car/car_base.xacro"/>
+    <xacro:include filename="$(find lane_change_sim)/urdf/main_car/car_camera.xacro"/>
+    <xacro:include filename="$(find lane_change_sim)/urdf/main_car/car_radar.xacro"/>
+</robot>

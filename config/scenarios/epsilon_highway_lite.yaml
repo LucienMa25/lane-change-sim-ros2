@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    scenario_mode: epsilon_highway_lite
+    epsilon_root: /home/project/msj/EPSILON/core/playgrounds/highway_lite
+    epsilon_lane_width: 4.0
+    epsilon_ref_speed: 7.0
+    epsilon_max_vehicles: 7

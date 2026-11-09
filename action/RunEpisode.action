@@ -1,0 +1,8 @@
+uint32 max_cycles
+---
+bool success
+uint32 executed_cycles
+string final_decision
+---
+uint32 cycle
+string status
